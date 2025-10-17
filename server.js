@@ -43,19 +43,12 @@ app.post("/create-order", async (req, res) => {
         },
       }
     );
-if (response.data.errors) {
-  res.status(400).json({
-    success: false,
-    message: "❌ Shopify رفض الطلب",
-    errors: response.data.errors
-  });
-} else {
-  res.status(200).json({
-    success: true,
-    message: "✅ الطلب راح بنجاح إلى Shopify",
-    order_id: response.data.order?.id,
-    financial_status: response.data.order?.financial_status
-  });
+res.status(200).json({
+  success: true,
+  message: "تم إرسال الطلب بنجاح ✅",
+  shopify_response: response.data,
+});
+
 }
   } catch (error) {
     console.error("❌ خطأ أثناء إنشاء الطلب:", error.response?.data || error.message);
