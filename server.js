@@ -1,12 +1,18 @@
+// 1️⃣ نجيب المكتبات
 import express from "express";
 import axios from "axios";
 import cors from "cors";
+
+// 2️⃣ نجهز التطبيق
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+// 3️⃣ معلومات الربط مع Shopify
 const SHOPIFY_STORE = process.env.SHOPIFY_STORE;
 const ADMIN_API_VERSION = process.env.ADMIN_API_VERSION || "2024-07";
 const ACCESS_TOKEN = process.env.ACCESS_TOKEN;
+
 // 4️⃣ نقطة استقبال الفورم
 app.post("/create-order", async (req, res) => {
   try {
@@ -43,13 +49,12 @@ app.post("/create-order", async (req, res) => {
         },
       }
     );
-res.status(200).json({
+
+   res.status(200).json({
   success: true,
   message: "تم إرسال الطلب بنجاح ✅",
   shopify_response: response.data,
 });
-
-}
   } catch (error) {
     console.error("❌ خطأ أثناء إنشاء الطلب:", error.response?.data || error.message);
     res.status(500).json({
