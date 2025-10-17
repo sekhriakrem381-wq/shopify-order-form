@@ -44,11 +44,11 @@ app.post("/create-order", async (req, res) => {
       }
     );
 
-    res.status(200).json({
-      success: true,
-      message: "تم إرسال الطلب بنجاح ✅",
-      order: response.data.order,
-    });
+res.status(200).json({
+  success: true,
+  message: "تم إرسال الطلب بنجاح ✅",
+  shopify_response: response.data,
+});
   } catch (error) {
     console.error("❌ خطأ أثناء إنشاء الطلب:", error.response?.data || error.message);
     res.status(500).json({
